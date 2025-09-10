@@ -144,6 +144,7 @@
 
 		        _classCallCheck(this, StickySidebar);
 
+		        this.destroyed = false;
 		        this.options = StickySidebar.extend(DEFAULTS, options);
 
 		        // Sidebar element query if there's no one, throw error.
@@ -545,6 +546,7 @@
 
 		          var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+		          if (this.destroyed) return;
 		          if (this._running) return;
 		          this._running = true;
 
@@ -613,6 +615,7 @@
 		            ResizeSensor.detach(this.sidebarInner, this.handleEvent);
 		            ResizeSensor.detach(this.container, this.handleEvent);
 		          }
+		          this.destroyed = true;
 		        }
 		      }], [{
 		        key: 'supportTransform',

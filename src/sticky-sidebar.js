@@ -73,6 +73,7 @@ const StickySidebar = (() => {
        * @param {Object} options - The options of sticky sidebar.
        */
       constructor(sidebar, options = {}){
+        this.destroyed = false;
         this.options = StickySidebar.extend(DEFAULTS, options);
 
         // Sidebar element query if there's no one, throw error.
@@ -538,6 +539,7 @@ const StickySidebar = (() => {
        * @public
        */
       updateSticky(event = {}){
+        if (this.destroyed) return;
         if( this._running ) return;
         this._running = true;
 
@@ -619,6 +621,7 @@ const StickySidebar = (() => {
           ResizeSensor.detach(this.sidebarInner, this.handleEvent);
           ResizeSensor.detach(this.container, this.handleEvent);
         }
+        this.destroyed = true;
       }
 
       /**
